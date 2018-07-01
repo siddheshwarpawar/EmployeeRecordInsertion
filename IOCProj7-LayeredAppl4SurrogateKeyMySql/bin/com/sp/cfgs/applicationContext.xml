@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<bean id="drds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql:///study"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>		
+	</bean>
+	
+	<bean id="stDao" class= "com.sp.dao.StudentDAOImpl">
+		<constructor-arg ref="drds"/>
+	</bean>
+	
+	<bean id="stService" class="com.sp.service.StudentServiceImpl">
+		<constructor-arg ref="stDao"/>
+	</bean>
+	
+	<bean id="stController" class = "com.sp.controller.StudentController">
+		<constructor-arg ref="stService"/>
+	</bean>
+	
+</beans>
